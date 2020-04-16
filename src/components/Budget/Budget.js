@@ -15,8 +15,8 @@ class Budget extends Component {
 
 
 componentDidMount() {
-  this.props.requestUserData(),
-  this.props.requestBudgetData()
+  this.props.requestUserData();
+  this.props.requestBudgetData();
 }
   
 
