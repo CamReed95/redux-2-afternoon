@@ -8,15 +8,22 @@ import Loading from './../shared/Loading/Loading';
 import Nav from './../shared/Nav';
 import './Budget.css';
 import {connect} from 'react-redux';
+import {requestUserData} from './../../ducks/userReducer';
+import {requestBudgetData} from './../../ducks/budgetReducer';
 
 class Budget extends Component {
 
 
-
+componentDidMount() {
+  this.props.requestUserData(),
+  this.props.requestBudgetData()
+}
   
 
   render() {
-    const {loading}=this.props.budget;
+    const {loading, purchases, budgetLimit}=this.props.budget;
+    const {firstName, lastName} = this.props.user;
+
     return (
       <Background>
 
@@ -40,8 +47,9 @@ class Budget extends Component {
 }
 function mapStateToProps(state) {
   return{
-    budget: state.budget
+    budget: state.budget,
+    user: state.user
   }
 }
 
-export default connect(mapStateToProps)(Budget);
+export default connect(mapStateToProps, {requestUserData, requestBudgetData})(Budget);
